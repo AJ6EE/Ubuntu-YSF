@@ -1,6 +1,6 @@
 file  { '/etc/YSFReflector.ini':
 	ensure => present,
-	source => '/root/YSFReflector/YSFReflector.ini',
+	source => '/root/Ubuntu-YSF/YSFReflector.ini',
 	mode => '0644',
 }
 
