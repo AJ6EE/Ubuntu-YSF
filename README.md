@@ -24,6 +24,11 @@ Comments are shown with ###
 ```
 $ ### lets be root
 $ sudo su - 
+$
+$ ###  install the dependencies to build the YSF software and get everything ready
+$
+$  apt-get install -y gcc make perl git wget puppet build-essential apache2  php7.4-cli php7.4-cgi libapache2-mod-php
+$
 $ ### Build the YSFReflector binary, init script and config file  ### 
 $ wget https://register.ysfreflector.de/install.sh
 $ chmod a+x install.sh
@@ -49,14 +54,13 @@ $ git clone https://github.com/dg9vh/YSFReflector-Dashboard.git
 $ cp -R YSFReflector-Dashboard/* /var/www/html/
 $ ### Don't worry about permissions for /var/www/html . Puppet will set them later. 
 $ ---
-$ apt-get install -y puppet
-$ puppet apply --noop puppet-V2.pp ### pre flight check. If no errors run the next command
-$ puppet apply puppet-V2.pp  
-$ ### This will install apache2, php and dependencies then start apache2 and the YSFReflector service, move YSFReflcetor.ini to /etc,
+$ puppet apply --noop puppet-ubuntu.pp ### pre flight check. If no errors run the next command
+$ puppet apply puppet-ubuntu.pp 
+$ ### This will start apache2 and the YSFReflector service, move YSFReflcetor.ini to /etc,
 $ ### add the user 'pi' to the www-data group, set the permissions on the /var/www/html folder and remove /var/www/html/index.html [we don't want it there any more]
 $ ---
 $ ### Go to http://ip-address-of-node/setup.php  ### the fields look like they are filled in but you have to type in all fields.
-$ ###               See the Dashboard.md file so you can copy/paste the fields. 
+$ ###               See the Dashboard.md file so you can copy/paste the fields. Manually enter the times you want in the 3 fields. 
 $ ###Your Dashboard is now done but we need to remove the setup.php file:
 $ puppet apply --noop puppet-drop-setup.pp  ### pre flight check. If no errors run the next command
 $ puppet apply puppet-drop-setup.pp
